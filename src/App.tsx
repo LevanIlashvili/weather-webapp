@@ -15,7 +15,7 @@ import { GlobalSearch } from './pages/global-search';
 const { darkAlgorithm } = theme;
 
 const App: FC = () => (
-  <ConfigProvider theme={{algorithm: darkAlgorithm}}>
+  <ConfigProvider>
     <BrowserRouter>
         <Layout style={{ minHeight: '100vh'}}>
             <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
@@ -38,10 +38,10 @@ const App: FC = () => (
                 </Menu>
             </Header>
             <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
-              <div className="" style={{ padding: 24, minHeight: '100vh' }}>
+              <div className="" style={{ padding: 24 }}>
               <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/global-search' element={<GlobalSearch />} />
+                <Route path='/queries' element={<GlobalSearch />} />
               </Routes>
               </div>
             </Content>
