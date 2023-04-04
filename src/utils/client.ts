@@ -2,7 +2,7 @@ import axios from "axios";
 import { IForecast } from "../types";
 
 export class Client {
-    private API_URL = `http://localhost:8801`;
+    private API_URL = process.env.REACT_APP_API_URL;
     public async reverseGeocode(location: string) {
         if (!location || !location.length) {
             return [];
