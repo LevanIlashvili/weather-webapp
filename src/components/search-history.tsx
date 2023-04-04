@@ -5,6 +5,7 @@ import { ClientContext } from "../providers/client.provider";
 import { HistoryContext } from "../providers/search-history.provider";
 import { SessionContext } from "../providers/session.provider";
 import { IForecast } from "../types";
+import { ForecastCard } from "./forecast-card";
 const { Title } = Typography;
 
 export interface HistoryProps {
@@ -15,11 +16,11 @@ export interface HistoryProps {
 
 export function SearchHistory(props: HistoryProps) {
     return <>
-            <div className="history">
+        <div className="history">
             <Title level={3}>{props.title ?? 'Search History'}</Title>
             {
                 props.history.map(item => (
-                    <>{JSON.stringify(item)}</>
+                    <ForecastCard forecast={item}/>
                 ))
             }
         </div>

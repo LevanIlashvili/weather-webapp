@@ -64,6 +64,6 @@ export function Home() {
                 />
             </Space>
         </div>
-        <SearchHistory title="My Search History" sessionId={sessionIdentifier} history={history}/>
+        <SearchHistory title="My Recent Searches" sessionId={sessionIdentifier} history={history}/>
     </>
 }

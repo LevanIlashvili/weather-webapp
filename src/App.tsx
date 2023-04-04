@@ -20,7 +20,7 @@ const App: FC = () => (
             <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
               <div className="logo">
                 <Link to="/">
-                  <Typography.Title level={4}>WEATHER</Typography.Title>
+                  <Typography.Title level={4}>weather</Typography.Title>
                 </Link>
               </div>
               <Menu theme="dark" mode="horizontal">

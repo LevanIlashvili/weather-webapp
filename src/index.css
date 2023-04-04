@@ -5,7 +5,13 @@
   margin: 16px 24px 16px 0;
   text-align: center;
   background: rgba(255, 255, 255, 0.3);
+  color: #fff;
 }
+
+.logo h4 {
+  color: #fff;
+}
+
 
 .hero {
   background-color: #f0f0f0;
@@ -15,4 +21,21 @@
 
 .history {
   margin: 20px 0;
+}
+
+.history .ant-card {
+  margin: 10px 0;
+}
+
+
+.daily-card h5 {
+  text-align: center;
+}
+
+.daily-card.hottest {
+  background-color: #ff6969;
+}
+
+.daily-card.coldest {
+  background-color: skyblue;
 }
