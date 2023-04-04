@@ -8,10 +8,12 @@ import { Home } from "./pages/home";
 import { GlobalSearch } from "./pages/global-search";
 import { SessionProvider } from "./providers/session.provider";
 import { ClientProvider } from "./providers/client.provider";
+import { HistoryProvider } from "./providers/search-history.provider";
 
 const App: FC = () => (
   <SessionProvider>
     <ClientProvider>
+      <HistoryProvider>
       <ConfigProvider>
         <BrowserRouter>
           <Layout style={{ minHeight: "100vh" }}>
@@ -48,6 +50,7 @@ const App: FC = () => (
           </Layout>
         </BrowserRouter>
       </ConfigProvider>
+      </HistoryProvider>
     </ClientProvider>
   </SessionProvider>
 );

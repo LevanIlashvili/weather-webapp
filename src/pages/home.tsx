@@ -1,8 +1,9 @@
-import { AutoComplete, Button, Form, Input, Select, Space, Typography } from "antd";
-import form from "antd/es/form";
+import { Select, Space, Typography } from "antd";
 import { debounce } from "lodash";
 import { useContext, useEffect, useState } from "react";
+import { SearchHistory } from "../components/search-history";
 import { ClientContext } from "../providers/client.provider";
+import { HistoryContext } from "../providers/search-history.provider";
 import { SessionContext } from "../providers/session.provider";
 const { Title } = Typography;
 
@@ -12,6 +13,7 @@ export function Home() {
 
     const { client } = useContext(ClientContext);
     const { sessionIdentifier } = useContext(SessionContext);
+    const { history, push } = useContext(HistoryContext);
 
     const onChange = (value: string) => {
         setValue(value);
@@ -36,9 +38,11 @@ export function Home() {
         const [lat, lon] = value.split(',').map(item => Number(Number(item).toFixed(7)));
         if (!lat || !lon) return;
         client.requestForecast(lat, lon, option.label, sessionIdentifier).then(result => {
-            console.log(result);
+            push(result);
         });
      }, [value]);
+
+    
 
     return <>
         <div className="hero">
@@ -60,8 +64,6 @@ export function Home() {
                 />
             </Space>
         </div>
-        <div className="history">
-            <Title level={3}>Search History</Title>
-        </div>
+        <SearchHistory title="My Search History" sessionId={sessionIdentifier} history={history}/>
     </>
 }

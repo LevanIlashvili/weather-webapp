@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IForecast } from "../types";
 
 export class Client {
     private API_URL = `http://localhost:8801`;
@@ -17,6 +18,11 @@ export class Client {
             city,
             sessionId
         });
+        return response.data;
+    }
+
+    public async getHistory(sessionIdentifier?: any): Promise<IForecast[]> {
+        const response = await axios.get(`${this.API_URL}/search-history?sessionId=${sessionIdentifier}`);
         return response.data;
     }
 }
