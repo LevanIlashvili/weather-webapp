@@ -1,33 +1,66 @@
-import { AutoComplete, Button, Form, Input, Space, Typography } from "antd";
+import { AutoComplete, Button, Form, Input, Select, Space, Typography } from "antd";
 import form from "antd/es/form";
 import { debounce } from "lodash";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ClientContext } from "../providers/client.provider";
+import { SessionContext } from "../providers/session.provider";
 const { Title } = Typography;
 
 export function Home() {
     const [options, setOptions] = useState<any[]>([]);
+    const [value, setValue] = useState('');
 
-    const handleSearch = async() => {
-        const mocks = ['test', 'test2', 'test3'];
-        
-        setOptions(mocks.map(item => {
-            return {
-                value: item,
-                label: `Item: ${item}`,
+    const { client } = useContext(ClientContext);
+    const { sessionIdentifier } = useContext(SessionContext);
+
+    const onChange = (value: string) => {
+        setValue(value);
+      };
+      
+    const onSearch = (value: string) => {
+        client.reverseGeocode(value).then((data) => {
+            if (data && data.length) {
+                setOptions(data.map((item: { fullName: any; lat: any; lon: any; }) => {
+                    return {
+                        label: item.fullName,
+                        value: `${item.lat},${item.lon}`,
+                    }
+                })) 
             }
-        }));
-    }
+        });
+    };
+
+    useEffect(() => {
+        if (!value || !value.length) return;
+        const [lat, lon] = value.split(',');
+        if (!lat || !lon) return;
+        const request = {
+            lat,
+            lon,
+            sessionIdentifier
+        };
+        // To-do - make request to API
+        console.log(request);
+     }, [value]);
+
     return <>
         <div className="hero">
             <Title>Get Weather Forecast</Title>
             <p>Search for cities, states, or other locations</p>
             <Space>
-            <AutoComplete
-                options={options}
-                placeholder='Type location name'
-                style={{width: 400, padding: 20}}
-                onSearch={debounce(handleSearch, 300)}
-            /> 
+                <Select
+                    showSearch={true}
+                    showArrow={false}
+                    style={{ width: 360, maxWidth: '80%', textAlign: 'left' }}
+                    placeholder="Search City"
+                    onChange={onChange}
+                    onSearch={debounce(onSearch, 300)}
+                    options={options}
+                    filterOption={(input, option) =>
+                        (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    }
+                    defaultValue={''}
+                />
             </Space>
         </div>
         <div className="history">
