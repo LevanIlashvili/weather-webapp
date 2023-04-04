@@ -9,4 +9,14 @@ export class Client {
         const response = await axios.get(`${this.API_URL}/open-weather/lookup?query=${location}`);
         return response.data;
     }
+
+    public async requestForecast(lat: number, lon: number, city: string, sessionId: string) {
+        const response = await axios.post(`${this.API_URL}/open-weather/forecast`, {
+            lat,
+            lon,
+            city,
+            sessionId
+        });
+        return response.data;
+    }
 }

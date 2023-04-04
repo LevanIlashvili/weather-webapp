@@ -32,15 +32,12 @@ export function Home() {
 
     useEffect(() => {
         if (!value || !value.length) return;
-        const [lat, lon] = value.split(',');
+        const option = options.find(item => item.value === value);
+        const [lat, lon] = value.split(',').map(item => Number(Number(item).toFixed(7)));
         if (!lat || !lon) return;
-        const request = {
-            lat,
-            lon,
-            sessionIdentifier
-        };
-        // To-do - make request to API
-        console.log(request);
+        client.requestForecast(lat, lon, option.label, sessionIdentifier).then(result => {
+            console.log(result);
+        });
      }, [value]);
 
     return <>
