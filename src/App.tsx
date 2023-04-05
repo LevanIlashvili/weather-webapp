@@ -1,6 +1,8 @@
 import type { FC } from "react";
 import { ConfigProvider, Layout, Menu, Typography } from "antd";
-import "antd/dist/reset.css";
+import 'antd/dist/reset.css';
+import './index.css';
+
 import { Header, Content } from "antd/lib/layout/layout";
 import { Link } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

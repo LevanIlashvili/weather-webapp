@@ -22,11 +22,11 @@ function DailyForecastCard(item: IDailyForecastCardProps) {
             <Card className={`daily-card ${item.isHottest? 'hottest': ''} ${item.isColdest? 'coldest': ''}`}>
                 
                 <Title level={5}>{data.date}</Title>
-                <Descriptions title="Min Temperature">
+                <Descriptions title="Min Temperature" layout='vertical'>
                     <Descriptions.Item label="Temp.">{item.data.temperature.min.celsius}</Descriptions.Item>
                     <Descriptions.Item label="Time">{minTime}:00</Descriptions.Item>
                 </Descriptions>
-                <Descriptions title="Max Temperature">
+                <Descriptions title="Max Temperature"  layout='vertical'>
                 <Descriptions.Item label="Temp.">{item.data.temperature.max.celsius}</Descriptions.Item>
                     <Descriptions.Item label="Time">{maxTime}:00</Descriptions.Item>
                 </Descriptions>
@@ -48,7 +48,7 @@ export function ForecastCard(props: IForecastCardProps) {
         <Row justify='space-between'>
             {
                 props.forecast.forecasts.map((forecast) => (
-                    <Col span={4}>
+                    <Col xs={24} sm={12} md={12} lg={8} xl={8} xxl={4}>
                         <DailyForecastCard timezoneDiff={settings.timezoneDiff} data={forecast} isHottest={forecast.temperature.max.celsius === maxTemperature} isColdest={forecast.temperature.min.celsius === minTemperature} />
                     </Col>
                 ))
